@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Mohran.XrmToolBox.SecurityModelSync</id>
+    <version>$version$</version>
+    <title>Security Model Sync</title>
+    <authors>Mohamed Mohran</authors>
+    <owners>Mohamed Mohran</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/mokasha/XrmToolBox.SecurityModelSync</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/mokasha/XrmToolBox.SecurityModelSync/main/src/SecurityModelSync/icon.png</iconUrl>
+    <icon>icon.png</icon>
+    <description>Compare the security model of two Dynamics 365 / Dataverse organizations and copy the differences: business units, users, teams, queues, security role assignments, team and queue membership. Preview every change before it is written. Upsert only: nothing is deleted, disabled or removed. Works on-premises and online.</description>
+    <summary>Copy business units, users, teams, queues, role assignments and memberships from one organization to another.</summary>
+    <releaseNotes>1.2026.11.1: first release.</releaseNotes>
+    <tags>XrmToolBox Plugins Dynamics365 Dataverse Security Users Teams Queues</tags>
+    <dependencies>
+      <!-- The Tool Library reads this to decide compatibility. It must be "XrmToolBox", not "XrmToolBoxPackage". -->
+      <dependency id="XrmToolBox" version="1.2025.10.74" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\net48\SecurityModelSync.dll" target="lib\net48\Plugins" />
+    <file src="icon.png" target="" />
+  </files>
+</package>

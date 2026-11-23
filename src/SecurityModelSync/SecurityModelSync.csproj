@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>SecurityModelSync</RootNamespace>
+    <AssemblyName>SecurityModelSync</AssemblyName>
+    <LangVersion>7.3</LangVersion>
+
+    <!-- XrmToolBox detects updates from the assembly version, so raise this on every release. -->
+    <Version>1.2026.11.1</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <Company>Mohamed Mohran</Company>
+    <Product>Security Model Sync for XrmToolBox</Product>
+    <Description>Compare and copy the security model between two Dynamics 365 / Dataverse organizations.</Description>
+
+    <!-- dotnet pack uses the nuspec: the Tool Library needs a dependency on "XrmToolBox" and the DLL under lib\net48\Plugins. -->
+    <NuspecFile>SecurityModelSync.nuspec</NuspecFile>
+    <NuspecProperties>version=$(Version);configuration=$(Configuration)</NuspecProperties>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XrmToolBoxPackage" Version="1.2025.10.74" />
+    <!-- XrmToolBox.Extensibility 1.2025.10.74 is built against this version; the package alone resolves an older one. -->
+    <PackageReference Include="MscrmTools.Xrm.Connection" Version="1.2025.9.64" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SecurityModelSyncControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Debug builds are copied into the local XrmToolBox so the tool shows up on the next start. -->
+  <Target Name="CopyToXrmToolBox" AfterTargets="Build"
+          Condition="'$(Configuration)' == 'Debug' And Exists('$(APPDATA)\MscrmTools\XrmToolBox\Plugins')">
+    <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb"
+          DestinationFolder="$(APPDATA)\MscrmTools\XrmToolBox\Plugins" ContinueOnError="true" />
+  </Target>
+
+</Project>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Console test runner for the sync engine. See README for how to run it. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>SecurityModelSync.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The engine is compiled in directly, so the tests do not need the XrmToolBox UI assemblies at run time. -->
+    <Compile Include="..\..\src\SecurityModelSync\Engine\*.cs" Link="Engine\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XrmToolBoxPackage" Version="1.2025.10.74" />
+    <!-- XrmToolBox.Extensibility 1.2025.10.74 is built against this version; the package alone resolves an older one. -->
+    <PackageReference Include="MscrmTools.Xrm.Connection" Version="1.2025.9.64" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+
+</Project>
